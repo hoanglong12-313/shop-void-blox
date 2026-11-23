@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10091b">
+<title>VOID Blox Shop — Demo</title>
+<style>
+:root{--bg:#090611;--panel:#130d20;--panel2:#1b1230;--line:#33204d;--purple:#a855f7;--pink:#e879f9;--text:#f7f0ff;--muted:#b8a9c9;--green:#7cf0b2}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#3b1761 0,transparent 35%),var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit}button{cursor:pointer;border:0}
+header{position:sticky;top:0;z-index:5;background:#0b0713eF;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{max-width:1160px;margin:auto;padding:14px 22px;display:flex;align-items:center;gap:20px}.logo{font-weight:900;letter-spacing:.5px;font-size:20px}.logo span{color:var(--pink)}.navlinks{display:flex;gap:20px;margin-left:auto;color:var(--muted);font-size:14px}.navlinks a:hover{color:white}
+.btn{padding:11px 16px;border-radius:11px;background:linear-gradient(100deg,#9333ea,#c026d3);color:white;font-weight:750;box-shadow:0 5px 24px #a855f733}.btn.secondary{background:#211532;border:1px solid var(--line);box-shadow:none}.btn.small{padding:9px 13px;font-size:13px}
+main{max-width:1160px;margin:auto;padding:34px 22px 70px}.hero{padding:50px 0 34px;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}.eyebrow{color:var(--pink);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.hero h1{font-size:clamp(36px,6vw,64px);line-height:1.02;margin:12px 0 16px;letter-spacing:-2px}.hero h1 em{font-style:normal;color:#d8a2ff;text-shadow:0 0 28px #a855f766}.hero p{color:var(--muted);line-height:1.7;max-width:570px}.heroart{min-height:250px;border:1px solid #63358b;border-radius:28px;background:linear-gradient(145deg,#291443,#100b1b 65%);display:grid;place-items:center;position:relative;overflow:hidden;box-shadow:0 0 70px #8b35d52a}.orb{width:180px;height:180px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f0abfc,#a855f7 35%,#42146b 70%);box-shadow:0 0 80px #a855f7aa;display:grid;place-items:center;font-size:64px}.heroart:after{content:"";position:absolute;inset:15px;border:1px solid #ffffff18;border-radius:20px;pointer-events:none}
+.stats{display:flex;gap:24px;margin-top:24px;color:var(--muted);font-size:13px}.stats b{display:block;color:white;font-size:19px}
+.notice{margin:10px 0 30px;padding:13px 16px;border:1px solid #684b25;background:#241a0d;border-radius:12px;color:#f5d69c;font-size:13px;line-height:1.55}
+.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:34px 0 16px}.sectionhead h2{margin:0;font-size:25px}.sectionhead p{margin:5px 0 0;color:var(--muted);font-size:13px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.filters input,.filters select,.field{background:#120c1c;border:1px solid var(--line);color:white;border-radius:10px;padding:11px 13px;outline:none}.filters input{flex:1;min-width:180px}.filters select{min-width:145px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:linear-gradient(160deg,#1b1230,#100b19);border:1px solid var(--line);border-radius:17px;overflow:hidden;transition:.2s}.card:hover{transform:translateY(-3px);border-color:#8b4cc0}.thumb{height:130px;background:radial-gradient(circle at 50% 35%,#7137a0,#27143d 50%,#140d20);display:grid;place-items:center;font-size:45px}.cardbody{padding:16px}.tag{font-size:10px;color:#e6c5ff;background:#40205c;padding:5px 8px;border-radius:30px}.card h3{margin:12px 0 7px;font-size:17px}.desc{color:var(--muted);font-size:12px;line-height:1.55;min-height:38px}.price{font-weight:850;font-size:19px;margin:14px 0;color:#e9c5ff}.cardfoot{display:flex;justify-content:space-between;align-items:center;gap:8px}.stock{font-size:11px;color:var(--green)}
+.service{padding:20px}.service .thumb{height:90px;border-radius:12px;margin-bottom:15px}.service .desc{min-height:52px}
+footer{border-top:1px solid var(--line);padding:24px 22px;color:var(--muted);text-align:center;font-size:12px}
+.modalback{position:fixed;inset:0;background:#05030bd9;z-index:20;display:none;align-items:center;justify-content:center;padding:18px}.modalback.show{display:flex}.modal{width:min(470px,100%);max-height:90vh;overflow:auto;background:#160e23;border:1px solid #553478;border-radius:18px;padding:22px;box-shadow:0 20px 80px #0009}.modalhead{display:flex;justify-content:space-between;align-items:center}.modal h2{margin:0 0 8px}.close{background:#2a1b3b;color:white;border-radius:8px;padding:7px 10px}.modal p{color:var(--muted);font-size:13px;line-height:1.55}.field{width:100%;margin:7px 0 12px}.label{font-size:12px;color:#d9c9e8}.formbtn{width:100%;margin-top:8px}.switch{color:#e2a9ff;cursor:pointer}.hidden{display:none!important}.orderline{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line)}.empty{color:var(--muted);text-align:center;padding:25px}
+
+.acc-item .thumb{height:155px;position:relative;overflow:hidden}
+.acc-item .thumb img{width:100%;height:100%;object-fit:cover}
+.acc-item .acc-meta{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}
+.acc-item .meta-box{background:#211532;border:1px solid #392451;border-radius:9px;padding:9px;font-size:11px;color:var(--muted)}
+.acc-item .meta-box b{display:block;color:var(--text);font-size:13px;margin-top:4px}
+.acc-item .acc-description{color:var(--muted);font-size:12px;line-height:1.5;min-height:36px}
+.acc-item .cardfoot{margin-top:12px}
+@media(max-width:760px){.nav{padding:12px 15px}.navlinks{display:none}.nav .btn{margin-left:auto}.hero{grid-template-columns:1fr;padding-top:30px}.heroart{min-height:190px}.orb{width:135px;height:135px;font-size:48px}.grid{grid-template-columns:repeat(2,1fr)}main{padding:20px 15px 50px}.stats{gap:15px}.sectionhead{align-items:start;flex-direction:column}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.thumb{height:150px}.hero h1{font-size:42px}.stats{justify-content:space-between}.nav .btn{padding:9px 11px;font-size:12px}}
+</style>
+</head>
+<body>
+<header><div class="nav">
+  <a class="logo" href="#">VOID<span> BLOX</span></a>
+  <nav class="navlinks"><a href="#accounts">Shop acc</a><a href="#services">Cày thuê</a><a href="#guide">Hướng dẫn</a></nav>
+  <button class="btn small secondary" id="accountBtn">Đăng nhập</button>
+  <button class="btn small" id="cartBtn">Đơn hàng (<span id="cartCount">0</span>)</button>
+</div></header>
+<main>
+<div id="homeContent">
+<section class="hero">
+ <div><div class="eyebrow">Blox Fruits • Gaming marketplace</div>
+  <h1>Lười cày blox fruits?<br><em>ghé ngay void blox của tigon!</em></h1>
+  <p>Shop demo dành cho cộng đồng Blox Fruits: xem danh mục tài khoản và dịch vụ, chọn sản phẩm rồi gửi yêu cầu đặt hàng thủ công.</p>
+  <a class="btn" href="#accounts">Khám phá shop</a>
+  <div class="stats"><div><b>24/7</b>Gửi yêu cầu</div><div><b>2 mục</b>Danh mục</div><div><b>Responsive</b>PC & mobile</div></div>
+ </div>
+ <div class="heroart"><div class="orb">⚔️</div></div>
+</section>
+<div class="notice"><b></b> Đây là demo web acc của shop, chua được mở. shop cung cấp acc ja rẻ, hs. uy tính trải nghiệm đặt lên hàng đầu.</div>
+
+<section id="accounts">
+ <div class="sectionhead"><div><h2>Acc nổi bật</h2><p>Thông tin mẫu để bạn thay bằng sản phẩm hợp lệ của shop.</p></div></div>
+ <div class="filters"><input id="search" placeholder="Tìm sản phẩm..." aria-label="Tìm sản phẩm"><select id="sort"><option value="default">Sắp xếp mặc định</option><option value="low">Giá thấp đến cao</option><option value="high">Giá cao đến thấp</option></select></div>
+ <div class="grid" id="accountGrid"></div>
+</section>
+<section id="services">
+ <div class="sectionhead"><div><h2>Dịch vụ game</h2><p>Các gói minh họa — cập nhật mô tả và giá trước khi sử dụng.</p></div></div>
+ <div class="grid" id="serviceGrid"></div>
+</section>
+<section id="guide">
+ <div class="sectionhead"><div><h2>Quy trình đặt hàng</h2></div></div>
+ <div class="card service"><p>1. Chọn sản phẩm hoặc dịch vụ.</p><p>2. Bấm “Gửi yêu cầu” để tạo đơn mẫu.</p><p>3. Shop liên hệ xác nhận chi tiết và phương thức thanh toán thủ công.</p><p>4. Chỉ thanh toán sau khi đã xác minh shop, giá và điều kiện giao dịch.</p></div>
+</section>
+</div>
+<section id="accPickerPage" class="hidden">
+ <div class="sectionhead">
+  <div><button class="btn small secondary" onclick="backToShop()">← Quay lại shop</button>
+  <h2 id="accPickerTitle" style="margin-top:16px">Chọn tài khoản</h2>
+  <p>Chọn đúng tài khoản bạn muốn mua. Không có lựa chọn ngẫu nhiên.</p></div>
+ </div>
+ <div class="filters"><input id="accSearch" placeholder="Tìm mã acc, level, trái ác quỷ...">
+ <select id="accSort"><option value="default">Sắp xếp mặc định</option><option value="low">Giá thấp đến cao</option><option value="high">Giá cao đến thấp</option></select></div>
+ <div class="grid" id="accPickerGrid"></div>
+</section>
+</main>
+<footer>VOID BLOX SHOP — Giao diện mẫu • Không liên kết hoặc được Roblox bảo trợ.</footer>
+
+<div class="modalback" id="modalBack"><div class="modal">
+ <div class="modalhead"><h2 id="modalTitle">Đăng nhập</h2><button class="close" id="closeModal">✕</button></div>
+ <div id="authPanel">
+  <p>Đăng nhập demo chỉ lưu trạng thái trên thiết bị này. Không dùng mật khẩu thật.</p>
+  <label class="label">Tên hiển thị</label><input class="field" id="username" placeholder="Tên của bạn">
+  <label class="label" id="passLabel">Mật khẩu demo</label><input class="field" id="password" type="password" placeholder="Tạo mật khẩu demo">
+  <button class="btn formbtn" id="authSubmit">Đăng nhập</button>
+  <p id="authSwitchText">Chưa có tài khoản? <span class="switch" id="authSwitch">Đăng ký</span></p>
+ </div>
+ <div id="cartPanel" class="hidden"><p>Đơn hàng đang chờ xác nhận. Đây là bản demo, chưa gửi đơn đến máy chủ.</p><div id="cartItems"></div><p><b>Tổng tạm tính: <span id="total">0đ</span></b></p><label class="label">Ghi chú liên hệ (không nhập mật khẩu Roblox)</label><input class="field" id="contact" placeholder="Email hoặc phương thức liên hệ"><button class="btn formbtn" id="placeOrder">Tạo yêu cầu đơn hàng</button></div>
+ <div id="resultPanel" class="hidden"><p id="resultText"></p><button class="btn formbtn" id="doneBtn">Đóng</button></div>
+</div></div>
+<script>
+const products=[
+ {id:1,type:'acc',name:'random acc',desc:'Thông tin tài khoản mẫu — hãy thay bằng mô tả của bạn.',price:50000,icon:'🌊',tag:'Tài khoản mẫu'},
+ {id:2,type:'acc',name:'random acc 1500-2400',desc:'Mô tả tiến trình và vật phẩm sở hữu (nếu phù hợp).',price:120000,icon:'🔥',tag:'Tài khoản mẫu'},
+ {id:3,type:'acc',name:'Acc random đầy đủ 2500+',desc:'Sản phẩm minh họa, chưa phải tài khoản có thật.',price:250000,icon:'💎',tag:'Tài khoản mẫu'},
+ {id:4,type:'service',name:'Gói hỗ trợ nhiệm vụ',desc:'Gói dịch vụ mẫu. Xác nhận phạm vi và điều kiện trước khi đặt.',price:30000,icon:'🧭',tag:'Dịch vụ'},
+ {id:5,type:'service',name:'Gói hướng dẫn build',desc:'Tư vấn cách phân bổ chỉ số và lựa chọn trang bị.',price:45000,icon:'⚡',tag:'Dịch vụ'},
+ {id:6,type:'service',name:'Gói hướng dẫn mastery',desc:'Hướng dẫn lộ trình luyện kỹ năng trong game.',price:60000,icon:'🏆',tag:'Dịch vụ'}
+];
+let cart=[];let mode='login';
+const money=n=>n.toLocaleString('vi-VN')+'đ';
+// Danh sách acc riêng của từng danh mục. Thay ảnh, level, trái, mô tả và giá tại đây.
+const individualAccounts=[
+ {id:'VB001',categoryId:1,name:'Acc Starter #001',price:50000,level:'1000+',fruit:'Light',info:'Mô tả chi tiết tài khoản mẫu.',image:'',status:'Còn hàng'},
+ {id:'VB002',categoryId:1,name:'Acc Starter #002',price:65000,level:'1200+',fruit:'Flame',info:'Mô tả chi tiết tài khoản mẫu.',image:'',status:'Còn hàng'},
+ {id:'VB003',categoryId:1,name:'Acc Starter #003',price:80000,level:'1500+',fruit:'Ice',info:'Mô tả chi tiết tài khoản mẫu.',image:'',status:'Còn hàng'},
+ {id:'VB004',categoryId:2,name:'Acc Progress #001',price:120000,level:'2400+',fruit:'Buddha',info:'Mô tả chi tiết tài khoản mẫu.',image:'',status:'Còn hàng'},
+ {id:'VB005',categoryId:2,name:'Acc Progress #002',price:150000,level:'2450+',fruit:'Portal',info:'Mô tả chi tiết tài khoản mẫu.',image:'',status:'Còn hàng'},
+ {id:'VB006',categoryId:3,name:'Acc Premium #001',price:250000,level:'MAX',fruit:'Kitsune',info:'Mô tả chi tiết tài khoản mẫu.',image:'',status:'Còn hàng'}
+];
+let selectedCategoryId=null;
+function card(p){
+ const isAcc = p.type === 'acc';
+ const action = isAcc ? `openAccPicker(${p.id})` : `addToCart(${p.id})`;
+ const buttonLabel = isAcc ? 'Chọn acc' : 'Chọn';
+ const serviceClass = isAcc ? '' : 'service';
+ return `<article class="card ${serviceClass}"><div class="thumb">${p.icon}</div><div class="cardbody"><span class="tag">${p.tag}</span><h3>${p.name}</h3><div class="desc">${p.desc}</div><div class="price">${money(p.price)}</div><div class="cardfoot"><span class="stock">● Có thể yêu cầu</span><button class="btn small" onclick="${action}">${buttonLabel}</button></div></div></article>`;
+}
+function render(){let q=document.getElementById('search').value.toLowerCase();let arr=products.filter(p=>p.type==='acc'&&p.name.toLowerCase().includes(q));let s=document.getElementById('sort').value;if(s==='low')arr.sort((a,b)=>a.price-b.price);if(s==='high')arr.sort((a,b)=>b.price-a.price);document.getElementById('accountGrid').innerHTML=arr.map(card).join('');document.getElementById('serviceGrid').innerHTML=products.filter(p=>p.type==='service').map(card).join('')}
+function openAccPicker(categoryId){
+ selectedCategoryId=categoryId;
+ const category=products.find(p=>p.id===categoryId);
+ document.getElementById('accPickerTitle').textContent='Chọn acc: '+(category?category.name:'');
+ document.getElementById('homeContent').classList.add('hidden');
+ document.getElementById('accPickerPage').classList.remove('hidden');
+ document.getElementById('accSearch').value='';
+ document.getElementById('accSort').value='default';
+ renderAccPicker();
+ window.scrollTo(0,0);
+}
+function backToShop(){document.getElementById('accPickerPage').classList.add('hidden');document.getElementById('homeContent').classList.remove('hidden');window.scrollTo(0,0)}
+function renderAccPicker(){
+ const q=document.getElementById('accSearch').value.toLowerCase();
+ let list=individualAccounts.filter(a=>a.categoryId===selectedCategoryId&&(a.id+' '+a.name+' '+a.level+' '+a.fruit+' '+a.info).toLowerCase().includes(q));
+ const sort=document.getElementById('accSort').value;
+ if(sort==='low')list.sort((a,b)=>a.price-b.price);
+ if(sort==='high')list.sort((a,b)=>b.price-a.price);
+ document.getElementById('accPickerGrid').innerHTML=list.length?list.map(a=>`<article class="card acc-item"><div class="thumb">${a.image?`<img src="${a.image}" alt="${a.name}" onerror="this.style.display='none'">`:'🎮'}</div><div class="cardbody"><span class="tag">${a.id}</span><h3>${a.name}</h3><div class="acc-meta"><div class="meta-box">LEVEL<b>${a.level}</b></div><div class="meta-box">TRÁI ÁC QUỶ<b>${a.fruit}</b></div></div><div class="acc-description">${a.info}</div><div class="price">${money(a.price)}</div><div class="cardfoot"><span class="stock">● ${a.status}</span><button class="btn small" onclick="chooseSpecificAcc('${a.id}')" ${a.status!=='Còn hàng'?'disabled':''}>Chọn mua</button></div></div></article>`).join(''):'<div class="empty">Danh mục này chưa có acc phù hợp.</div>';
+}
+function chooseSpecificAcc(accId){
+ const a=individualAccounts.find(x=>x.id===accId);
+ if(!a||a.status!=='Còn hàng')return;
+ cart.push({id:a.id,type:'acc',name:a.name+' ('+a.id+')',desc:'Level '+a.level+' • Trái '+a.fruit,price:a.price});
+ document.getElementById('cartCount').textContent=cart.length;
+ openModal('cart');
+}
+function addToCart(id){let p=products.find(x=>x.id===id);if(!p)return;cart.push(p);document.getElementById('cartCount').textContent=cart.length;openModal('cart')}
+function openModal(which){document.getElementById('modalBack').classList.add('show');document.getElementById('authPanel').classList.toggle('hidden',which!=='auth');document.getElementById('cartPanel').classList.toggle('hidden',which!=='cart');document.getElementById('resultPanel').classList.add('hidden');document.getElementById('modalTitle').textContent=which==='cart'?'Yêu cầu đặt hàng':(mode==='login'?'Đăng nhập':'Đăng ký');if(which==='cart')renderCart()}
+function renderCart(){let box=document.getElementById('cartItems');box.innerHTML=cart.length?cart.map((p,i)=>`<div class="orderline"><span>${p.name}${p.desc?`<br><small style="color:var(--muted)">${p.desc}</small>`:''}</span><span>${money(p.price)} <button class="close" onclick="removeItem(${i})">×</button></span></div>`).join(''):'<div class="empty">Chưa chọn sản phẩm nào.</div>';document.getElementById('total').textContent=money(cart.reduce((a,p)=>a+p.price,0))}
+function removeItem(i){cart.splice(i,1);document.getElementById('cartCount').textContent=cart.length;renderCart()}
+document.getElementById('search').addEventListener('input',render);document.getElementById('sort').addEventListener('change',render);
+document.getElementById('accSearch').addEventListener('input',renderAccPicker);document.getElementById('accSort').addEventListener('change',renderAccPicker);
+document.getElementById('accountBtn').onclick=()=>openModal('auth');document.getElementById('cartBtn').onclick=()=>openModal('cart');document.getElementById('closeModal').onclick=()=>document.getElementById('modalBack').classList.remove('show');document.getElementById('doneBtn').onclick=()=>document.getElementById('modalBack').classList.remove('show');
+document.getElementById('authSwitch').onclick=()=>{mode=mode==='login'?'register':'login';document.getElementById('modalTitle').textContent=mode==='login'?'Đăng nhập':'Đăng ký';document.getElementById('authSubmit').textContent=mode==='login'?'Đăng nhập':'Tạo tài khoản';document.getElementById('authSwitchText').innerHTML=mode==='login'?'Chưa có tài khoản? <span class="switch" id="authSwitch">Đăng ký</span>':'Đã có tài khoản? <span class="switch" id="authSwitch">Đăng nhập</span>';document.getElementById('authSwitch').onclick=()=>document.getElementById('authSwitchText').querySelector('span').click();};
+document.getElementById('authSubmit').onclick=()=>{let u=document.getElementById('username').value.trim();if(!u||!document.getElementById('password').value){alert('Nhập tên hiển thị và mật khẩu demo.');return}alert('Đây chỉ là giao diện thử nghiệm. Chưa có hệ thống tài khoản thật hoặc bảo mật máy chủ.')};
+document.getElementById('placeOrder').onclick=()=>{if(!cart.length){alert('Bạn chưa chọn sản phẩm.');return}let c=document.getElementById('contact').value.trim();if(!c){alert('Vui lòng nhập thông tin liên hệ.');return}document.getElementById('cartPanel').classList.add('hidden');document.getElementById('resultPanel').classList.remove('hidden');document.getElementById('modalTitle').textContent='Đã tạo bản nháp';document.getElementById('resultText').textContent='Yêu cầu demo đã được tạo trên giao diện. Chưa có dữ liệu nào được gửi hoặc thanh toán. Hãy tích hợp máy chủ và kênh liên hệ an toàn trước khi mở shop.';cart=[];document.getElementById('cartCount').textContent='0'};
+document.addEventListener('DOMContentLoaded', () => {
+  render();
+});
+</script>
+</body></html>
